@@ -1,11 +1,12 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const FavouritesPage = () => {
   const [favorites, setFavorites] = useState([]);
 
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavorites(storedFavorites);
+  useEffect(async() => {
+    const response = await axios.get(`http://localhost:3000/api/v1/qoute/favourites`);
+    setFavorites(response.data.data);
   }, []);
 
   return (

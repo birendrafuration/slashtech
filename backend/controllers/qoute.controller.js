@@ -16,4 +16,21 @@ const addFavourite=async(req,res)=>{
     }
 }
 
-export {addFavourite}
+
+
+const getFavourites = async (req, res) => {
+  try {
+   
+    const favouritesList = await Favourites.findAll();
+
+   
+    res.json(new ApiResponse(200, favouritesList, "Favourites retrieved successfully"));
+  } catch (error) {
+    
+    res.json(new ApiError(500, error.message));
+  }
+};
+
+
+
+export {addFavourite,getFavourites}

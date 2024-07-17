@@ -18,7 +18,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api/v1/qoute/favourites",QouteRouter)
+app.use("/api/v1/qoute/favourites",QouteRouter);
+
 
 const PORT = 3000;
 

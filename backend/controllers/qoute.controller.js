@@ -7,7 +7,6 @@ import { ApiResponse } from "../utils/apiResponse.js";
 
 const addFavourite=async(req,res)=>{
     try {
-        console.log("ji")
         const favourite= favouritesSchemaValidation.parse(req.body);
         const newPost=await Favourites.create(favourite);
         res.json(new ApiResponse(201, newPost, "favourite successfully"));

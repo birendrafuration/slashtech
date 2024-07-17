@@ -1,12 +1,20 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axiosInstance from '../api/axiosInstance';
 
 const FavouritesPage = () => {
   const [favorites, setFavorites] = useState([]);
 
-  useEffect(async() => {
-    const response = await axios.get(`http://localhost:3000/api/v1/qoute/favourites`);
-    setFavorites(response.data.data);
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const response = await axiosInstance.get('/qoute/favourites');
+        setFavorites(response.data.data);
+      } catch (error) {
+        console.error('Error fetching favourites:', error);
+      }
+    };
+
+    fetchFavorites();
   }, []);
 
   return (
@@ -15,7 +23,7 @@ const FavouritesPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {favorites.map((favorite, index) => (
           <div key={index} className="border p-4 rounded shadow">
-            <p className="mb-2">"{favorite.quote}"</p>
+            <p className="mb-2">"{favorite.content}"</p>
             <p className="text-right">- {favorite.author}</p>
           </div>
         ))}
